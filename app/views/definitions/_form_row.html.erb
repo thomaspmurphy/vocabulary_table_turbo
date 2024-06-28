@@ -1,0 +1,16 @@
+<%= turbo_frame_tag dom_id(definition) do %>
+  <tr class="hover:bg-gray-50">
+    <%= form_with(model: definition, local: true, class: "contents") do |form| %>
+      <td class="px-6 py-4 whitespace-nowrap">
+        <%= form.text_field :term, class: "w-full px-2 py-1 text-sm border rounded" %>
+      </td>
+      <td class="px-6 py-4">
+        <%= form.text_area :definition, rows: 3, class: "w-full px-2 py-1 text-sm border rounded" %>
+      </td>
+      <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+        <%= form.submit "Save", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-xs mr-2" %>
+        <%= link_to "Cancel", definition_path(definition), class: "text-gray-600 hover:text-gray-900", data: { turbo_frame: dom_id(definition) } %>
+      </td>
+    <% end %>
+  </tr>
+<% end %>

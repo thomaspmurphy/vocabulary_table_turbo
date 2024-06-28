@@ -1,0 +1,4 @@
+<%= turbo_stream.prepend "definition_list" do %>
+  <%= render "definition", definition: @definition %>
+<% end %>
+<%= turbo_stream.replace "definition_form", partial: "form", locals: { definition: Definition.new } %>
