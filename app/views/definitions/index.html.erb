@@ -1,9 +1,16 @@
 <div class="container mx-auto px-4 py-8">
-  <h1 class="text-3xl font-bold mb-6 text-gray-800">Definitions List</h1>
+  <div class="flex items-center mb-6">
+    <h1 class="text-3xl font-bold text-gray-800 border border-gray-300 rounded-lg px-4 py-2"
+        style="writing-mode: vertical-rl">
+      哲学
+    </h1>
+  </div>
 
   <%= turbo_frame_tag "definition_form" do %>
     <%= render "form", definition: Definition.new %>
   <% end %>
+
+  <%= turbo_stream_from @definitions, :messages %>
 
   <div class="mt-8 overflow-x-auto rounded-lg shadow">
     <table class="w-full">

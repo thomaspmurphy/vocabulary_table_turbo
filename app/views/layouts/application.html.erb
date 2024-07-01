@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Tetsu</title>
+    <title>哲学</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -15,5 +15,18 @@
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>
     </main>
+
+  <dialog id="turbo-confirm" class="p-6 rounded-lg shadow-lg bg-white">
+    <form method="dialog">
+      <h3 data-behavior="title" class="text-xl font-semibold mb-4">Are you sure about this pal?</h3>
+      <div data-behavior="description"></div>
+
+      <div class="flex justify-end space-x-4">
+        <button value="cancel" class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 focus:outline-none">Cancel</button>
+        <button value="confirm" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none">Confirm</button>
+      </div>
+    </form>
+  </dialog>
+
   </body>
 </html>
