@@ -1,0 +1,13 @@
+<% text = defined?(progress).nil? ? "Delete" : "Deleting (#{progress})" %>
+<div id="<%= dom_id(definition, :delete) %>" class="inline-block">
+  <%= button_to text, definition_path(definition),
+    method: :delete,
+    class: "text-red-600 hover:text-red-900",
+    form: {
+      class: 'inline-block',
+      data: {
+        turbo_confirm: "Are you sure about this, bub?",
+        turbo_confirm_description: "Do you really want to delete the entry for #{definition.term}?"
+      }
+    } %>
+</div>
