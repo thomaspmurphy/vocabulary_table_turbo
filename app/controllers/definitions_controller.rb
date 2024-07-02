@@ -1,4 +1,6 @@
 class DefinitionsController < ApplicationController
+  include ActionView::RecordIdentifier
+
   def index
     @definitions = Definition.order(:created_at)
   end
@@ -27,9 +29,10 @@ class DefinitionsController < ApplicationController
 
   def update
     @definition = Definition.find(params[:id])
+
     if @definition.update(definition_params)
       respond_to do |format|
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(dom_id(@definition), partial: 'definitions/definition', locals: { definition: @definition }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(dom_id(@definition), partial: 'definitions/form_row', locals: { definition: @definition }) }
         format.html { redirect_to definitions_path }
       end
     else
@@ -38,7 +41,20 @@ class DefinitionsController < ApplicationController
   end
 
   def destroy
-    @definition = Definition.find(params[:id])
+    @definition = Definition.find(params[:id])    
+
+    (10..100).step(10) do |n|
+      Turbo::StreamsChannel.broadcast_action_to(
+        @definition,
+        action: :replace,
+        target: dom_id(@definition, :delete),
+        partial: "definitions/delete_button", 
+        locals: { definition: @definition, progress: "#{n}%" }
+      )
+
+    sleep 0.3
+    end
+
     @definition.destroy
     respond_to do |format|
       format.turbo_stream

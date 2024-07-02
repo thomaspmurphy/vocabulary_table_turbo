@@ -10,8 +10,6 @@
     <%= render "form", definition: Definition.new %>
   <% end %>
 
-  <%= turbo_stream_from @definitions, :messages %>
-
   <div class="mt-8 overflow-x-auto rounded-lg shadow">
     <table class="w-full">
       <thead class="bg-gray-50">
